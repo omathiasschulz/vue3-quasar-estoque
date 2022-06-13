@@ -1,5 +1,5 @@
 import { ref } from 'vue'
-import useSupabase from 'src/boot/supabase'
+import useSupabase from '../boot/supabase'
 
 const user = ref(null)
 
@@ -8,7 +8,7 @@ const user = ref(null)
  *
  * @param string url
  */
-export default function useAuthUser(url) {
+export default function useAuthUser() {
   const { supabase } = useSupabase()
 
   const login = async ({ email, password }) => {
