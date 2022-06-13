@@ -2,6 +2,8 @@
 
 Projeto de Estoque desenvolvido utilizando a linguagem de programação [Vue.js 3](https://vuejs.org/), framework [Quasar](https://quasar.dev/) e a ferramenta [Supabase](https://supabase.com/).
 
+Documentação do framework [Quasar](https://quasar.dev/vue-components/)
+
 ## Iniciar a aplicação
 
 Para rodar o aplicativo utilize o seguinte comando:
