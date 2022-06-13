@@ -1,41 +1,35 @@
-# Vue 3 Quasar Estoque (vue3-quasar-estoque)
+# vue3-quasar-estoque
 
-Vue 3 Quasar Estoque
+Projeto de Estoque desenvolvido utilizando a linguagem de programação [Vue.js 3](https://vuejs.org/), framework [Quasar](https://quasar.dev/) e a ferramenta [Supabase](https://supabase.com/).
 
-## Install the dependencies
-```bash
-yarn
-# or
-npm install
-```
+## Iniciar a aplicação
 
-### Start the app in development mode (hot-code reloading, error reporting, etc.)
+Para rodar o aplicativo utilize o seguinte comando:
+
 ```bash
 quasar dev
 ```
 
+Caso o framework Quasar ainda não esteja instalado no seu computador, utilize o seguinte comando:
 
-### Lint the files
+**Obs:** Você deve possuir o `npm` instalado na sua máquina.
+
 ```bash
-yarn lint
-# or
-npm run lint
+npm install -g @quasar/cli
 ```
 
+### Dependências
 
-### Format the files
+Para instalar as dependências utilize o seguinte comando:
+
 ```bash
-yarn format
-# or
-npm run format
+yarn
 ```
 
+### Buildar a aplicação
 
+Para buildar o aplicativo e utilizar em produção utilize o seguinte comando:
 
-### Build the app for production
 ```bash
 quasar build
 ```
-
-### Customize the configuration
-See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
