@@ -53,7 +53,16 @@ export default function useAuthUser() {
   }
 
   const sendPasswordResetEmail = async (email) => {
-    const { user, error } = await supabase.auth.resetPasswordForEmail(email)
+    const { user, error } = await supabase.auth.api.resetPasswordForEmail(email)
+
+    if (error) throw error
+    return user
+  }
+
+  const resetPassword = async (accessToken, newPassword) => {
+    const { user, error } = await supabase.auth.api.updateUser(accessToken, {
+      password: newPassword,
+    })
 
     if (error) throw error
     return user
@@ -68,5 +77,6 @@ export default function useAuthUser() {
     register,
     update,
     sendPasswordResetEmail,
+    resetPassword,
   }
 }

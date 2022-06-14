@@ -13,7 +13,8 @@
         </div>
 
         <div class="full-width">
-          <q-btn label="Registrar" color="primary" class="full-width" flat to="/register" />
+          <q-btn label="Registrar" color="primary" class="full-width" flat size="sm" to="/register" />
+          <q-btn label="Esqueceu sua senha?" color="primary" class="full-width" flat size="sm" to="/new-password" />
         </div>
       </div>
     </q-form>
