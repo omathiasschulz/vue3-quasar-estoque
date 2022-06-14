@@ -1,6 +1,6 @@
 <template>
   <q-page padding>
-    <q-form class="row justify-center" @submit.prevent="handleResetPassword">
+    <q-form class="row justify-center" @submit.prevent="handleChangePassword">
       <p class="col-12 text-h5 text-center">Nova Senha</p>
 
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
@@ -32,7 +32,7 @@ export default defineComponent({
     const route = useRoute()
     const token = route.query.token
 
-    const handleResetPassword = async () => {
+    const handleChangePassword = async () => {
       try {
         await resetPassword(token, password.value)
         router.replace({ name: 'login' })
@@ -43,7 +43,7 @@ export default defineComponent({
 
     return {
       password,
-      handleResetPassword,
+      handleChangePassword,
     }
   },
 })
