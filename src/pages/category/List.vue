@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <div class="row">
-      <q-table title="Categorias" :rows="rows" :columns="columns" row-key="id" class="col-12">
+      <q-table title="Categorias" :rows="categories" :columns="columns" row-key="id" class="col-12" :loading="loading">
         <template v-slot:top>
           <span class="text-h6">Categoria</span>
           <q-space />
@@ -30,16 +30,36 @@ const columns = [
   { name: 'actions', align: 'right', label: 'Ações', field: 'actions', sortable: true },
 ]
 
-const rows = [{ id: 123, name: 'Calçado' }]
-
-import { defineComponent } from 'vue'
+import useApi from 'src/composables/UseApi'
+import useNotify from 'src/composables/UseNotify'
+import { defineComponent, onMounted, ref } from 'vue'
 
 export default defineComponent({
   name: 'PageCategoryList',
   setup() {
+    const categories = ref([])
+    const loading = ref(true)
+    const { list } = useApi()
+    const { notifyError } = useNotify()
+
+    const handleListCategories = async () => {
+      try {
+        loading.value = true
+        categories.value = await list('category')
+        loading.value = false
+      } catch (error) {
+        notifyError(error.message)
+      }
+    }
+
+    onMounted(() => {
+      handleListCategories()
+    })
+
     return {
       columns,
-      rows,
+      categories,
+      loading,
     }
   },
 })
