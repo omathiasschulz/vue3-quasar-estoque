@@ -5,13 +5,13 @@
         <template v-slot:top>
           <span class="text-h6">Categoria</span>
           <q-space />
-          <q-btn label="Novo registro" color="primary">
+          <q-btn label="Novo registro" color="primary" icon="mdi-plus" dense :to="{ name: 'form-category' }">
             <q-tooltip>Adicionar um novo registro</q-tooltip>
           </q-btn>
         </template>
         <template v-slot:body-cell-actions="props">
           <q-td :props="props" class="q-gutter-x-sm">
-            <q-btn icon="mdi-pencil-outline" color="info" dense size="sm">
+            <q-btn icon="mdi-pencil-outline" color="info" dense size="sm" @click="handleEdit(props.row)">
               <q-tooltip>Editar</q-tooltip>
             </q-btn>
             <q-btn icon="mdi-delete-outline" color="negative" dense size="sm">
@@ -27,12 +27,13 @@
 <script>
 const columns = [
   { name: 'name', align: 'left', label: 'Nome', field: 'name', sortable: true },
-  { name: 'actions', align: 'right', label: 'Ações', field: 'actions', sortable: true },
+  { name: 'actions', align: 'right', label: 'Ações', field: 'actions' },
 ]
 
 import useApi from 'src/composables/UseApi'
 import useNotify from 'src/composables/UseNotify'
 import { defineComponent, onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 export default defineComponent({
   name: 'PageCategoryList',
@@ -41,6 +42,7 @@ export default defineComponent({
     const loading = ref(true)
     const { list } = useApi()
     const { notifyError } = useNotify()
+    const router = useRouter()
 
     const handleListCategories = async () => {
       try {
@@ -52,6 +54,10 @@ export default defineComponent({
       }
     }
 
+    const handleEdit = (category) => {
+      router.push({ name: 'form-category', params: { id: category.id } })
+    }
+
     onMounted(() => {
       handleListCategories()
     })
@@ -60,6 +66,7 @@ export default defineComponent({
       columns,
       categories,
       loading,
+      handleEdit,
     }
   },
 })
