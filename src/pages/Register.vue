@@ -4,11 +4,24 @@
       <p class="col-12 text-h5 text-center">Registrar</p>
 
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-        <q-input label="Nome" v-model="form.name" />
+        <q-input
+          label="Nome"
+          v-model="form.name"
+          lazy-rules
+          :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório!']" />
 
-        <q-input label="Email" v-model="form.email" />
+        <q-input
+          label="Email"
+          type="email"
+          v-model="form.email"
+          lazy-rules
+          :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório!']" />
 
-        <q-input label="Senha" v-model="form.password" />
+        <q-input
+          label="Senha"
+          v-model="form.password"
+          lazy-rules
+          :rules="[(val) => (val && val.length >= 6) || 'Campo obrigatório (Pelo menos 6 caracteres)!']" />
 
         <div class="full-width q-pt-md q-gutter-y-sm">
           <q-btn label="Acessar" color="primary" class="full-width" outline rounded type="submit" />
@@ -24,6 +37,7 @@
 import { defineComponent, ref } from 'vue'
 import useAuthUser from '../composables/UseAuthUser'
 import { useRouter } from 'vue-router'
+import useNotify from 'src/composables/UseNotify'
 
 export default defineComponent({
   name: 'RegisterPage',
@@ -31,6 +45,7 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const { register } = useAuthUser()
+    const { notifySuccess, notifyError } = useNotify()
 
     const form = ref({
       name: '',
@@ -41,9 +56,10 @@ export default defineComponent({
     const handleRegister = async () => {
       try {
         await register(form.value)
+        notifySuccess('Registro realizado com sucesso!')
         router.push({ name: 'confirmation', query: { email: form.value.email } })
       } catch (error) {
-        console.error(error)
+        notifyError(error.message)
       }
     }
 

@@ -4,9 +4,19 @@
       <p class="col-12 text-h5 text-center">Login</p>
 
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-        <q-input label="Email" v-model="form.email" />
+        <q-input
+          label="Email"
+          type="email"
+          v-model="form.email"
+          lazy-rules
+          :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório!']" />
 
-        <q-input label="Senha" v-model="form.password" />
+        <q-input
+          label="Senha"
+          type="password"
+          v-model="form.password"
+          lazy-rules
+          :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório!']" />
 
         <div class="full-width q-pt-md">
           <q-btn label="Acessar" color="primary" class="full-width" outline rounded type="submit" />
@@ -25,6 +35,7 @@
 import { defineComponent, ref } from 'vue'
 import useAuthUser from '../composables/UseAuthUser'
 import { useRouter } from 'vue-router'
+import useNotify from 'src/composables/UseNotify'
 
 export default defineComponent({
   name: 'LoginPage',
@@ -32,6 +43,7 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const { login } = useAuthUser()
+    const { notifySuccess, notifyError } = useNotify()
 
     const form = ref({
       email: '',
@@ -41,9 +53,10 @@ export default defineComponent({
     const handleLogin = async () => {
       try {
         await login(form.value)
+        notifySuccess('Login realizado com sucesso!')
         router.push({ name: 'me' })
       } catch (error) {
-        console.error(error)
+        notifyError(error.message)
       }
     }
 
