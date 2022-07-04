@@ -4,6 +4,10 @@ Projeto de Estoque desenvolvido utilizando a linguagem de programação [Vue.js 
 
 Documentação do framework [Quasar](https://quasar.dev/vue-components/)
 
+<https://estoque-schulz.netlify.app/me>
+
+<https://quasar.dev/vue-components/>
+
 ## Iniciar a aplicação
 
 Para rodar o aplicativo utilize o seguinte comando:
