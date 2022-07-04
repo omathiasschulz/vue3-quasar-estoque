@@ -14,7 +14,7 @@
             <q-btn icon="mdi-pencil-outline" color="info" dense size="sm" @click="handleEdit(props.row)">
               <q-tooltip>Editar</q-tooltip>
             </q-btn>
-            <q-btn icon="mdi-delete-outline" color="negative" dense size="sm">
+            <q-btn icon="mdi-delete-outline" color="negative" dense size="sm" @click="handleRemove(props.row)">
               <q-tooltip>Excluir</q-tooltip>
             </q-btn>
           </q-td>
@@ -30,6 +30,7 @@ const columns = [
   { name: 'actions', align: 'right', label: 'Ações', field: 'actions' },
 ]
 
+import { useQuasar } from 'quasar'
 import useApi from 'src/composables/UseApi'
 import useNotify from 'src/composables/UseNotify'
 import { defineComponent, onMounted, ref } from 'vue'
@@ -40,9 +41,10 @@ export default defineComponent({
   setup() {
     const categories = ref([])
     const loading = ref(true)
-    const { list } = useApi()
-    const { notifyError } = useNotify()
+    const { list, remove } = useApi()
+    const { notifyError, notifySuccess } = useNotify()
     const router = useRouter()
+    const $q = useQuasar()
 
     const handleListCategories = async () => {
       try {
@@ -58,6 +60,23 @@ export default defineComponent({
       router.push({ name: 'form-category', params: { id: category.id } })
     }
 
+    const handleRemove = (category) => {
+      try {
+        $q.dialog({
+          title: 'Confirmar',
+          message: `Deseja realmente excluir a categoria ${category.name}?`,
+          cancel: true,
+          persistent: true,
+        }).onOk(async () => {
+          await remove('category', category.id)
+          notifySuccess('Categoria removida com sucesso!')
+          handleListCategories()
+        })
+      } catch (error) {
+        notifyError(error.message)
+      }
+    }
+
     onMounted(() => {
       handleListCategories()
     })
@@ -67,6 +86,7 @@ export default defineComponent({
       categories,
       loading,
       handleEdit,
+      handleRemove,
     }
   },
 })
