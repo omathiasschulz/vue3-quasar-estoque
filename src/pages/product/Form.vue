@@ -14,6 +14,8 @@
 
         <q-editor v-model="form.description" min-height="5rem" />
 
+        <q-input label="Imagem" stack-label v-model="img" type="file" accept="image/*" />
+
         <q-input
           label="Quantidade"
           v-model="form.amount"
@@ -59,15 +61,19 @@ export default defineComponent({
   setup() {
     const router = useRouter()
     const route = useRoute()
-    const { post, getById, update, list } = useApi()
+    const { post, getById, update, list, uploadImg } = useApi()
     const { notifyError, notifySuccess } = useNotify()
     const optionsCategory = ref([])
-    const form = ref({ name: '', description: '', amount: 0, price: 0, category_id: '' })
+    const form = ref({ name: '', description: '', amount: 0, price: 0, category_id: '', img_url: '' })
+    const img = ref([])
     // a partir do request valida se é uma inserção ou alteração
     const isUpdate = computed(() => route.params.id)
 
     const handleSubmit = async () => {
       try {
+        if (img.value.length > 0) {
+          form.value.img_url = await uploadImg(img.value[0], 'products')
+        }
         if (isUpdate.value) {
           handleGetProduct(isUpdate.value)
           await update('product', form.value)
@@ -107,6 +113,7 @@ export default defineComponent({
       form,
       handleSubmit,
       optionsCategory,
+      img,
     }
   },
 })
