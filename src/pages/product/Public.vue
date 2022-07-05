@@ -22,7 +22,7 @@
 
         <template v-slot:item="props">
           <div class="q-pa-xs col-xs-12 col-sm-6 col-md-4">
-            <q-card>
+            <q-card class="cursor-pointer" v-ripple:primary @click="handleShowDetails(props.row)">
               <q-img :src="props.row.img_url" :ratio="4 / 3" />
               <q-card-section class="text-center">
                 <div class="text-h6">{{ props.row.name }}</div>
@@ -33,6 +33,11 @@
         </template>
       </q-table>
     </div>
+
+    <dialog-product-details
+      :show="showDialogDetails"
+      :product="productDetail"
+      @hide-dialog="showDialogDetails = false" />
   </q-page>
 </template>
 
@@ -43,9 +48,13 @@ import useNotify from 'src/composables/UseNotify'
 import { useRoute } from 'vue-router'
 import { columnsProduct } from './table'
 import { formatCurrency } from 'src/utils/format'
+import DialogProductDetails from 'src/components/DialogProductDetails.vue'
 
 export default defineComponent({
   name: 'PageProductPublic',
+  components: {
+    DialogProductDetails,
+  },
   setup() {
     const products = ref([])
     const loading = ref(true)
@@ -53,6 +62,8 @@ export default defineComponent({
     const { notifyError } = useNotify()
     const route = useRoute()
     const filter = ref('')
+    const showDialogDetails = ref(false)
+    const productDetail = ref({})
 
     const handleList = async (userId) => {
       try {
@@ -62,6 +73,11 @@ export default defineComponent({
       } catch (error) {
         notifyError(error.message)
       }
+    }
+
+    const handleShowDetails = (product) => {
+      productDetail.value = product
+      showDialogDetails.value = true
     }
 
     onMounted(() => {
@@ -76,6 +92,9 @@ export default defineComponent({
       loading,
       formatCurrency,
       filter,
+      showDialogDetails,
+      productDetail,
+      handleShowDetails,
     }
   },
 })
