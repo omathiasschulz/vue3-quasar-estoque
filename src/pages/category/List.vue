@@ -5,7 +5,13 @@
         <template v-slot:top>
           <span class="text-h6">Categoria</span>
           <q-space />
-          <q-btn label="Novo registro" color="primary" icon="mdi-plus" dense :to="{ name: 'form-category' }">
+          <q-btn
+            label="Novo registro"
+            color="primary"
+            icon="mdi-plus"
+            dense
+            :to="{ name: 'form-category' }"
+            v-if="$q.platform.is.desktop">
             <q-tooltip>Adicionar um novo registro</q-tooltip>
           </q-btn>
         </template>
@@ -21,6 +27,11 @@
         </template>
       </q-table>
     </div>
+    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+      <q-btn fab icon="mdi-plus" color="primary" :to="{ name: 'form-category' }" v-if="$q.platform.is.mobile">
+        <q-tooltip>Adicionar um novo registro</q-tooltip>
+      </q-btn>
+    </q-page-sticky>
   </q-page>
 </template>
 
