@@ -13,6 +13,13 @@ export default function useApi() {
     return data
   }
 
+  const listPublic = async (table, userId) => {
+    const { data, error } = await supabase.from(table).select('*').eq('user_id', userId)
+
+    if (error) throw error
+    return data
+  }
+
   const getById = async (table, id) => {
     const { data, error } = await supabase.from(table).select('*').eq('id', id)
 
@@ -69,5 +76,6 @@ export default function useApi() {
     update,
     remove,
     uploadImg,
+    listPublic,
   }
 }

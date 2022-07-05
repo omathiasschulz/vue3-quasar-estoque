@@ -10,6 +10,15 @@
         :loading="loading">
         <template v-slot:top>
           <span class="text-h6">Produtos</span>
+          <q-btn
+            label="Minha Loja"
+            dense
+            size="sm"
+            outline
+            class="q-ml-sm"
+            icon="mdi-store"
+            color="primary"
+            @click="handleGoToStore" />
           <q-space />
           <q-btn
             label="Novo registro"
@@ -52,6 +61,7 @@
 <script>
 import { useQuasar } from 'quasar'
 import useApi from 'src/composables/UseApi'
+import useAuthUser from 'src/composables/UseAuthUser'
 import useNotify from 'src/composables/UseNotify'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -62,15 +72,16 @@ export default defineComponent({
   setup() {
     const products = ref([])
     const loading = ref(true)
-    const { list, remove } = useApi()
+    const { listPublic, remove } = useApi()
     const { notifyError, notifySuccess } = useNotify()
+    const { user } = useAuthUser()
     const router = useRouter()
     const $q = useQuasar()
 
     const handleList = async () => {
       try {
         loading.value = true
-        products.value = await list('product')
+        products.value = await listPublic('product', user.value.id)
         loading.value = false
       } catch (error) {
         notifyError(error.message)
@@ -98,6 +109,16 @@ export default defineComponent({
       }
     }
 
+    const handleGoToStore = async () => {
+      const userId = user.value.id
+      router.push({
+        name: 'product-public',
+        params: {
+          id: userId,
+        },
+      })
+    }
+
     onMounted(() => {
       handleList()
     })
@@ -108,6 +129,7 @@ export default defineComponent({
       loading,
       handleEdit,
       handleRemove,
+      handleGoToStore,
     }
   },
 })
