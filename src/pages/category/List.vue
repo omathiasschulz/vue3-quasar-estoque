@@ -44,6 +44,7 @@
 <script>
 import { useQuasar } from 'quasar'
 import useApi from 'src/composables/UseApi'
+import useAuthUser from 'src/composables/UseAuthUser'
 import useNotify from 'src/composables/UseNotify'
 import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
@@ -54,15 +55,16 @@ export default defineComponent({
   setup() {
     const categories = ref([])
     const loading = ref(true)
-    const { list, remove } = useApi()
+    const { listPublic, remove } = useApi()
     const { notifyError, notifySuccess } = useNotify()
     const router = useRouter()
     const $q = useQuasar()
+    const { user } = useAuthUser()
 
     const handleListCategories = async () => {
       try {
         loading.value = true
-        categories.value = await list('category')
+        categories.value = await listPublic('category', user.value.id)
         loading.value = false
       } catch (error) {
         notifyError(error.message)

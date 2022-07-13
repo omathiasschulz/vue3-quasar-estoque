@@ -6,6 +6,19 @@
       </div>
     </div>
     <div class="row">
+      <q-select
+        outlined
+        dense
+        v-model="categoryId"
+        :options="optionsCategories"
+        label="Categoria"
+        class="col-12"
+        option-label="name"
+        option-value="id"
+        map-options
+        emit-value
+        clearable
+        @update:model-value="handleList(route.params.id)" />
       <q-table
         title="Produtos"
         :rows="products"
@@ -69,11 +82,15 @@ export default defineComponent({
     const filter = ref('')
     const showDialogDetails = ref(false)
     const productDetail = ref({})
+    const optionsCategories = ref([])
+    const categoryId = ref('')
 
     const handleList = async (userId) => {
       try {
         loading.value = true
-        products.value = await listPublic('product', userId)
+        products.value = categoryId.value
+          ? await listPublic('product', userId, 'category_id', categoryId.value)
+          : await listPublic('product', userId)
         loading.value = false
       } catch (error) {
         notifyError(error.message)
@@ -85,13 +102,19 @@ export default defineComponent({
       showDialogDetails.value = true
     }
 
+    const handleListCategories = async (userId) => {
+      optionsCategories.value = await listPublic('category', userId)
+    }
+
     onMounted(() => {
       if (route.params.id) {
         handleList(route.params.id)
+        handleListCategories(route.params.id)
       }
     })
 
     return {
+      handleList,
       columnsProduct,
       products,
       loading,
@@ -101,6 +124,9 @@ export default defineComponent({
       productDetail,
       handleShowDetails,
       brand,
+      optionsCategories,
+      categoryId,
+      route,
     }
   },
 })
