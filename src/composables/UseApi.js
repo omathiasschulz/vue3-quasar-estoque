@@ -85,9 +85,9 @@ export default function useApi() {
 
   const getBrand = async () => {
     // busca o id do usuário
-    // tenta primeiro se o usuário está logado
-    // se não, pega o id a partir da prop id que está na URL
-    const id = user?.value?.id || route.params.id
+    // tenta primeiro a partir da prop id que está na URL
+    // se não, pega o id do usuário logado (se estiver)
+    const id = route.params.id || user?.value?.id
 
     if (id) {
       $q.loading.show({
