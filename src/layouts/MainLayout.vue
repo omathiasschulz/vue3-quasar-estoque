@@ -6,6 +6,8 @@
 
         <q-toolbar-title> Estoque </q-toolbar-title>
 
+        <dark-mode-toggle></dark-mode-toggle>
+
         <q-btn-dropdown flat color="white" icon="person">
           <q-list>
             <q-item clickable v-close-popup @click="handleLogout">
@@ -39,6 +41,7 @@ import useAuthUser from 'src/composables/UseAuthUser'
 import { useRouter } from 'vue-router'
 import { useQuasar } from 'quasar'
 import useApi from 'src/composables/UseApi'
+import DarkModeToggle from 'src/components/DarkModeToggle.vue'
 
 const linksList = [
   {
@@ -72,6 +75,7 @@ export default defineComponent({
 
   components: {
     EssentialLink,
+    DarkModeToggle,
   },
 
   setup() {
