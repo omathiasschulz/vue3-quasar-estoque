@@ -1,8 +1,8 @@
 {
   "name": "vue3-quasar-estoque",
   "version": "0.0.1",
-  "description": "Vue 3 Quasar Estoque",
-  "productName": "Vue 3 Quasar Estoque",
+  "description": "Estoque Schulz",
+  "productName": "Estoque Schulz",
   "author": "Mathias Schulz <mathias@schulz.net.br>",
   "private": true,
   "scripts": {
