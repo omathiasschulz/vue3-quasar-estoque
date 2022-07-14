@@ -27,7 +27,9 @@
         class="col-12"
         :loading="loading"
         grid
-        :filter="filter">
+        :filter="filter"
+        v-model:pagination="initialPagination"
+        hide-pagination>
         <template v-slot:top>
           <span class="text-h6">Produtos</span>
           <q-space />
@@ -51,6 +53,13 @@
         </template>
       </q-table>
     </div>
+    <div class="row justify-center q-mt-md">
+      <q-pagination
+        v-model="initialPagination.page"
+        :max="pagesNumber"
+        direction-links
+        @update:model-value="handleScrollToTop" />
+    </div>
 
     <dialog-product-details
       :show="showDialogDetails"
@@ -60,11 +69,11 @@
 </template>
 
 <script>
-import { defineComponent, onMounted, ref } from 'vue'
+import { computed, defineComponent, onMounted, ref } from 'vue'
 import useApi from 'src/composables/UseApi'
 import useNotify from 'src/composables/UseNotify'
 import { useRoute } from 'vue-router'
-import { columnsProduct } from './table'
+import { columnsProduct, initialPagination } from './table'
 import { formatCurrency } from 'src/utils/format'
 import DialogProductDetails from 'src/components/DialogProductDetails.vue'
 
@@ -106,6 +115,10 @@ export default defineComponent({
       optionsCategories.value = await listPublic('category', userId)
     }
 
+    const handleScrollToTop = async () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+
     onMounted(() => {
       if (route.params.id) {
         handleList(route.params.id)
@@ -127,6 +140,9 @@ export default defineComponent({
       optionsCategories,
       categoryId,
       route,
+      initialPagination,
+      pagesNumber: computed(() => Math.ceil(products.value.length / initialPagination.value.rowPerPage)),
+      handleScrollToTop,
     }
   },
 })
