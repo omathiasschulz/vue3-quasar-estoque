@@ -14,6 +14,8 @@
 
         <q-input label="Telefone" v-model="form.phone" mask="(##) #####-####" unmasked-value />
 
+        <q-input label="Imagem" stack-label v-model="paralax" type="file" accept="image/*" />
+
         <div class="row justify-center q-gutter-md q-pa-md">
           <q-color v-model="form.primary" class="col-md-4 col-sm-12 col-xs-12 text-center" />
 
@@ -40,9 +42,10 @@ export default defineComponent({
   name: 'PageConfigForm',
   setup() {
     const router = useRouter()
-    const { post, update, listPublic } = useApi()
+    const { post, update, listPublic, uploadImg } = useApi()
     const { notifyError, notifySuccess } = useNotify()
-    const form = ref({ name: '', phone: '', primary: '', secondary: '' })
+    const form = ref({ name: '', phone: '', primary: '', secondary: '', paralax_url: '' })
+    const paralax = ref([])
     const { setBrand } = useBrand()
     const { user } = useAuthUser()
 
@@ -60,6 +63,9 @@ export default defineComponent({
 
     const handleSubmit = async () => {
       try {
+        if (paralax.value.length > 0) {
+          form.value.paralax_url = await uploadImg(paralax.value[0], 'paralax')
+        }
         if (form.value.id) {
           await update('config', form.value)
           notifySuccess('Registro atualizado com sucesso!')
@@ -78,6 +84,7 @@ export default defineComponent({
     return {
       form,
       handleSubmit,
+      paralax,
     }
   },
 })
