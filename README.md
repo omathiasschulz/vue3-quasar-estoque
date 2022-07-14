@@ -39,3 +39,13 @@ Para buildar o aplicativo e utilizar em produção utilize o seguinte comando:
 ```bash
 quasar build
 ```
+
+## Quasar
+
+quasar upgrade
+
+Verifica se existem novas atualizações
+
+quasar upgrade -i
+
+Instala as novas atualizações de dependências do Quasar
