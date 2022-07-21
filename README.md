@@ -79,3 +79,11 @@ icongenie generate -m pwa -i ./icon.png
 ```
 
 Em seguida, o HTML apresentado no resultado da execução do comando deve ser copiado e colado no arquivo `index.html` sobreescrevendo os ícones antigos.
+
+## Avalia qualidade do PWA
+
+[PWA BUILDER](https://www.pwabuilder.com/)
+
+[Manifest Categories Types](https://github.com/w3c/manifest/wiki/Categories)
+
+[Maskable](https://maskable.app/editor)
