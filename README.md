@@ -97,3 +97,7 @@ Após a avaliação do PWA, é necessário acessar o próxima página e selecion
 Escolher a opção Android e pressionar o botão "Store Package".
 
 Em seguida é necessário conferir as informações da aplicação e selecionar a opção "Generate".
+
+Após a criação do APK, é necessário acessar o [Google Play Console](https://play.google.com/console)
+
+Obs: Lembrar de atualizar a prop `sha256_cert_fingerprints` do asset links com a informações que está no Google Play Console em > Configuração > Integridade do app.
