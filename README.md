@@ -87,3 +87,13 @@ Qualidade do APP PWA: [PWA BUILDER](https://www.pwabuilder.com/).
 Tipo de Categorias utilizadas no Manifesto: [Manifest Categories Types](https://github.com/w3c/manifest/wiki/Categories).
 
 Criar um icone Maskable: [Maskable](https://maskable.app/editor).
+
+## Postar o APP na Google Play
+
+Primeiro é necessário construir o APK da aplicação que pode ser realizado no site [PWA BUILDER](https://www.pwabuilder.com/).
+
+Após a avaliação do PWA, é necessário acessar o próxima página e selecionar a opção "Publish your PWA to stores".
+
+Escolher a opção Android e pressionar o botão "Store Package".
+
+Em seguida é necessário conferir as informações da aplicação e selecionar a opção "Generate".

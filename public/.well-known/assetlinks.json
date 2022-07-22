@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "app.netlify.estoque_schulz.twa",
+      "sha256_cert_fingerprints": [
+        "9A:97:24:47:6D:65:01:42:B1:4D:44:75:FD:18:39:AA:21:78:C5:D5:FD:09:4E:37:EA:9C:A0:71:6C:4C:4B:21"
+      ]
+    }
+  }
+]
