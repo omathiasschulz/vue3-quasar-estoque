@@ -2,7 +2,7 @@
 
 Aplicação de Estoque desenvolvido utilizando o framework [Vue.js 3](https://vuejs.org/), framework [Quasar](https://quasar.dev/) e a ferramenta open source [Supabase](https://supabase.com/).
 
-Documentação do framework [Quasar](https://quasar.dev/vue-components/)
+Documentação do framework [Quasar](https://quasar.dev/vue-components/).
 
 ## Iniciar a aplicação
 
@@ -58,7 +58,7 @@ quasar upgrade -i
 
 ## Geração do Ícone da Aplicação
 
-O ícone vai ser gerado utilizando o `icongenie`.
+O ícone pode ser gerado utilizando o [Icon Genie CLI](https://quasar.dev/icongenie/introduction).
 
 Para instalar globalmente no computador utilize o seguinte comando:
 
@@ -68,11 +68,11 @@ npm install -g @quasar/icongenie
 
 **Obs:** Tamanho mínimo recomendado: 1024x2024.
 
-Gerar o ícone no site: [canva.com](canva.com)
+Para criar um ícone você pode utilizar o site [Canva](https://www.canva.com/).
 
-Salvar o ícone da raiz do projeto.
+Em seguida é só salvar o ícone da raiz do projeto.
 
-Rodar o seguinte comando para gerar os novos ícones.
+E depois rodar o seguinte comando para gerar os novos ícones:
 
 ```bash
 icongenie generate -m pwa -i ./icon.png
@@ -80,10 +80,10 @@ icongenie generate -m pwa -i ./icon.png
 
 Em seguida, o HTML apresentado no resultado da execução do comando deve ser copiado e colado no arquivo `index.html` sobreescrevendo os ícones antigos.
 
-## Avalia qualidade do PWA
+## Avaliar a qualidade do PWA
 
-[PWA BUILDER](https://www.pwabuilder.com/)
+Qualidade do APP PWA: [PWA BUILDER](https://www.pwabuilder.com/).
 
-[Manifest Categories Types](https://github.com/w3c/manifest/wiki/Categories)
+Tipo de Categorias utilizadas no Manifesto: [Manifest Categories Types](https://github.com/w3c/manifest/wiki/Categories).
 
-[Maskable](https://maskable.app/editor)
+Criar um icone Maskable: [Maskable](https://maskable.app/editor).
