@@ -1,5 +1,5 @@
 <template>
-  <q-layout class="back" view="lHh Lpr lFf">
+  <q-layout class="login-layout" view="lHh Lpr lFf">
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -7,11 +7,11 @@
 </template>
 
 <style>
-.back {
-
+.body--dark .login-layout {
   background-image: linear-gradient(to right, black, #12393e);
-  /* background-image: linear-gradient(to right, #12393e, #25727d); */
-
+}
+.body--light .login-layout {
+  background-image: linear-gradient(to right, #12393e, #25727d);
 }
 </style>
 

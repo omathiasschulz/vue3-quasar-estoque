@@ -1,6 +1,6 @@
 <template>
   <q-page class="row justify-center items-center">
-    <q-card style="background-color: #0e2a2f; width: 90%; max-width: 550px; padding: 20px">
+    <q-card class="card-login" style="width: 90%; max-width: 550px; padding: 20px">
       <q-card-section style="">
         <q-form @submit.prevent="handleLogin">
           <p class="col-12 text-h5 text-center">LOGIN</p>
@@ -37,15 +37,24 @@
 
 <style>
 .body--dark input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px #121212 inset;
-  box-shadow: 0 0 0 30px #121212 inset;
+  -webkit-box-shadow: 0 0 0 30px #191919 inset;
+  box-shadow: 0 0 0 30px #191919 inset;
   -webkit-text-fill-color: white;
   border-bottom: 1.5px solid #a0a0a0;
 }
+
 .body--light input:-webkit-autofill {
-  -webkit-box-shadow: 0 0 0 30px white inset;
-  box-shadow: 0 0 0 30px white inset;
-  border-bottom: 1.5px solid #c6c6c6;
+  -webkit-box-shadow: 0 0 0 30px #d8d8d8 inset;
+  box-shadow: 0 0 0 30px #d8d8d8 inset;
+  border-bottom: 1.5px solid #a4a4a4;
+}
+
+.body--dark .card-login {
+  background-color: #191919;
+}
+
+.body--light .card-login {
+  background-color: #d8d8d8;
 }
 </style>
 
