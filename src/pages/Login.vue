@@ -31,6 +31,20 @@
   </q-page>
 </template>
 
+<style>
+.body--dark input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px #121212 inset;
+  box-shadow: 0 0 0 30px #121212 inset;
+  -webkit-text-fill-color: white;
+  border-bottom: 1.5px solid #a0a0a0;
+}
+.body--light input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0 30px white inset;
+  box-shadow: 0 0 0 30px white inset;
+  border-bottom: 1.5px solid #c6c6c6;
+}
+</style>
+
 <script>
 import { defineComponent, onMounted, ref } from 'vue'
 import useAuthUser from '../composables/UseAuthUser'
