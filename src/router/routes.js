@@ -10,6 +10,13 @@ const routes = [
       { path: 'confirmation', name: 'confirmation', component: () => import('pages/EmailConfirmation.vue') },
       { path: 'new-password', name: 'newPassword', component: () => import('pages/ForgotPassword.vue') },
       { path: 'reset-password', name: 'resetPassword', component: () => import('pages/ResetPassword.vue') },
+    ],
+  },
+  // rotas não autenticadas - clean main layout
+  {
+    path: '/',
+    component: () => import('layouts/LoginLayout.vue'),
+    children: [
       { path: 'product-public/:id', name: 'product-public', component: () => import('pages/product/Public.vue') },
     ],
   },
