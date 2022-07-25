@@ -1,13 +1,5 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
-      <q-toolbar>
-        <q-toolbar-title>Estoque Schulz</q-toolbar-title>
-
-        <dark-mode-toggle></dark-mode-toggle>
-      </q-toolbar>
-    </q-header>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -15,22 +7,25 @@
 </template>
 
 <script>
+import { useQuasar } from 'quasar'
 import useApi from 'src/composables/UseApi'
 import { defineComponent, onMounted } from 'vue'
-import DarkModeToggle from 'src/components/DarkModeToggle.vue'
 
 export default defineComponent({
   name: 'LoginLayout',
 
-  components: {
-    DarkModeToggle,
-  },
+  components: {},
 
   setup() {
+    const $q = useQuasar()
     const { getBrand } = useApi()
 
     onMounted(() => {
       getBrand()
+
+      if ($q.localStorage.getItem('darkMode')) {
+        $q.dark.set($q.localStorage.getItem('darkMode'))
+      }
     })
 
     return {}
