@@ -1,14 +1,14 @@
 <template>
-  <q-page class="justify-center" padding>
-    <p class="text-body1">Obrigado por se registrar :)</p>
+  <q-page class="row justify-center items-center" padding>
+    <div>
+      <p class="text-body1">Obrigado por se registrar :)</p>
 
-    <p class="text-body1">
-      Confirme seu email para finalizar o cadastro da sua conta: <strong>{{ $route.query.email }}</strong>
-    </p>
+      <p class="text-body1">
+        Confirme seu email para finalizar o cadastro da sua conta: <strong>{{ $route.query.email }}</strong>
+      </p>
 
-    <div class="row justify-center">
-      <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-        <q-btn label="Voltar ao Login" color="primary" class="full-width" :to="{ name: 'login' }" />
+      <div class="col-md-4 col-sm-6 col-xs-10" style="margin-top: 50px">
+        <q-btn label="Voltar ao Login" color="primary" class="full-width" :to="{ name: 'login' }" outline rounded />
       </div>
     </div>
   </q-page>
