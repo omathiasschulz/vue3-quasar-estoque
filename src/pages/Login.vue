@@ -24,9 +24,16 @@
               <q-btn label="Acessar" color="primary" class="full-width" outline rounded type="submit" />
             </div>
 
-            <div class="full-width">
-              <q-btn label="Registrar" color="primary" class="full-width" flat size="sm" to="/register" />
-              <q-btn label="Esqueceu sua senha?" color="primary" class="full-width" flat size="sm" to="/new-password" />
+            <div class="">
+              <q-btn label="Registrar" color="primary" class="full-width" flat size="sm" to="/register" rounded />
+              <q-btn
+                label="Esqueceu sua senha?"
+                color="primary"
+                class="full-width"
+                flat
+                size="sm"
+                to="/new-password"
+                rounded />
             </div>
           </div>
         </q-form>

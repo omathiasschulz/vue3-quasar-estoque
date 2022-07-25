@@ -1,7 +1,7 @@
 <template>
-  <q-page padding>
-    <q-form class="row justify-center" @submit.prevent="handleRegister">
-      <p class="col-12 text-h5 text-center">Registrar</p>
+  <q-page padding class="row justify-center items-center">
+    <q-form style="width: 90%; max-width: 550px" @submit.prevent="handleRegister">
+      <p class="col-12 text-h5 text-center">REGISTRAR</p>
 
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
         <q-input
@@ -26,7 +26,7 @@
         <div class="full-width q-pt-md q-gutter-y-sm">
           <q-btn label="Acessar" color="primary" class="full-width" outline rounded type="submit" />
 
-          <q-btn label="Voltar" color="primary" class="full-width" flat :to="{ name: 'login' }" />
+          <q-btn label="Voltar" color="primary" class="full-width" flat :to="{ name: 'login' }" rounded />
         </div>
       </div>
     </q-form>
