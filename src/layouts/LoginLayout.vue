@@ -1,10 +1,19 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
+  <q-layout class="back" view="lHh Lpr lFf">
     <q-page-container>
       <router-view />
     </q-page-container>
   </q-layout>
 </template>
+
+<style>
+.back {
+
+  background-image: linear-gradient(to right, black, #12393e);
+  /* background-image: linear-gradient(to right, #12393e, #25727d); */
+
+}
+</style>
 
 <script>
 import { useQuasar } from 'quasar'

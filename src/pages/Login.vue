@@ -1,33 +1,37 @@
 <template>
   <q-page class="row justify-center items-center">
-    <q-form @submit.prevent="handleLogin" style="width: 80%; max-width: 500px">
-      <p class="col-12 text-h5 text-center">Login</p>
+    <q-card style="background-color: #0e2a2f; width: 90%; max-width: 550px; padding: 20px">
+      <q-card-section style="">
+        <q-form @submit.prevent="handleLogin">
+          <p class="col-12 text-h5 text-center">LOGIN</p>
 
-      <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-        <q-input
-          label="Email"
-          type="email"
-          v-model="form.email"
-          lazy-rules
-          :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório!']" />
+          <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
+            <q-input
+              label="Email"
+              type="email"
+              v-model="form.email"
+              lazy-rules
+              :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório!']" />
 
-        <q-input
-          label="Senha"
-          type="password"
-          v-model="form.password"
-          lazy-rules
-          :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório!']" />
+            <q-input
+              label="Senha"
+              type="password"
+              v-model="form.password"
+              lazy-rules
+              :rules="[(val) => (val && val.length > 0) || 'Campo obrigatório!']" />
 
-        <div class="full-width q-pt-md">
-          <q-btn label="Acessar" color="primary" class="full-width" outline rounded type="submit" />
-        </div>
+            <div class="full-width q-pt-md">
+              <q-btn label="Acessar" color="primary" class="full-width" outline rounded type="submit" />
+            </div>
 
-        <div class="full-width">
-          <q-btn label="Registrar" color="primary" class="full-width" flat size="sm" to="/register" />
-          <q-btn label="Esqueceu sua senha?" color="primary" class="full-width" flat size="sm" to="/new-password" />
-        </div>
-      </div>
-    </q-form>
+            <div class="full-width">
+              <q-btn label="Registrar" color="primary" class="full-width" flat size="sm" to="/register" />
+              <q-btn label="Esqueceu sua senha?" color="primary" class="full-width" flat size="sm" to="/new-password" />
+            </div>
+          </div>
+        </q-form>
+      </q-card-section>
+    </q-card>
   </q-page>
 </template>
 
@@ -46,6 +50,7 @@
 </style>
 
 <script>
+import { useQuasar } from 'quasar'
 import { defineComponent, onMounted, ref } from 'vue'
 import useAuthUser from '../composables/UseAuthUser'
 import { useRouter } from 'vue-router'
@@ -55,6 +60,7 @@ export default defineComponent({
   name: 'LoginPage',
 
   setup() {
+    const $q = useQuasar()
     const router = useRouter()
     const { login, isLoggedIn } = useAuthUser()
     const { notifySuccess, notifyError } = useNotify()
@@ -72,8 +78,12 @@ export default defineComponent({
 
     const handleLogin = async () => {
       try {
+        $q.loading.show({
+          backgroundColor: 'dark',
+        })
         await login(form.value)
         notifySuccess('Login realizado com sucesso!')
+        $q.loading.hide()
         router.push({ name: 'me' })
       } catch (error) {
         notifyError(error.message)
